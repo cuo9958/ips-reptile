@@ -13,7 +13,7 @@ let amapCount = 0;
 async function amap() {
     if (amapCount > 300000) return;
     amapCount++;
-    const ip = ipServer.getNowIp();
+    const ip = ipServer.getRandomIp();
     try {
         const res = await axios.get("https://restapi.amap.com/v3/ip?ip=" + ip + "&key=" + amapkey);
         const data = res.data;
@@ -46,7 +46,7 @@ let bdCount = 0;
 async function baidumap() {
     if (bdCount > 30000) return;
     bdCount++;
-    const ip = ipServer.getNowIp();
+    const ip = ipServer.getRandomIp();
     try {
         const res = await axios.get("http://api.map.baidu.com/location/ip?ak=" + bdak + "&ip=" + ip);
         const data = res.data;

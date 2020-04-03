@@ -80,5 +80,11 @@ module.exports = {
             };
         }
         return `${curip.i1}.${curip.i2}.${curip.i3}.${curip.i4}`;
+    },
+    getRandomIp() {
+        function getOne() {
+            return Math.round(Math.random() * 255);
+        }
+        return `${getOne()}.${getOne()}.${getOne()}.${getOne()}`;
     }
 };
