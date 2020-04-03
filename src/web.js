@@ -285,6 +285,7 @@ async function amap() {
             if (typeof city == "object") {
                 city = city.join(",");
             }
+            console.log("restapi.amap.com/v3/ip");
             saveData({
                 ip,
                 address: province + " " + city
