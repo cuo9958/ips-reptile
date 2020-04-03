@@ -9,7 +9,9 @@ const def = {
     //纬度
     latitude: "",
     //经度
-    longitude: ""
+    longitude: "",
+    province: "",
+    city: ""
 };
 //ip,address,ip6,ip6v,d1
 const saveData = async data => {

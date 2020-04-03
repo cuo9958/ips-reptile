@@ -1,9 +1,5 @@
-const axios = require("axios");
-const config = require("config");
 const saveData = require("./save");
 const getIps = require("./getips");
-
-const amapkey = config.get("amapkey");
 
 /**
  * 网址https://www.ip138.com/iplookup.asp
@@ -265,37 +261,6 @@ async function ip5(page, browser) {
     });
 }
 
-let amapCount = 0;
-/**
- * 使用高德api
- */
-async function amap() {
-    if (amapCount > 300000) return;
-    amapCount++;
-    const ip = getIps();
-    try {
-        const res = await axios.get("https://restapi.amap.com/v3/ip?ip=" + ip + "&key=" + amapkey);
-        const data = res.data;
-        if (data.status == 1 && data.infocode == "10000") {
-            let province = data.province;
-            if (typeof province == "object") {
-                province = province.join(",");
-            }
-            let city = data.city;
-            if (typeof city == "object") {
-                city = city.join(",");
-            }
-            console.log("restapi.amap.com/v3/ip");
-            saveData({
-                ip,
-                address: province + " " + city
-            });
-        }
-    } catch (error) {
-        console.log(error);
-    }
-}
-
 module.exports = [
     ip138,
     ipcn,
@@ -305,6 +270,5 @@ module.exports = [
     hao7188,
     yqie,
     ip51240,
-    ip5,
-    amap
+    ip5
 ];

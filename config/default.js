@@ -10,5 +10,7 @@ module.exports = {
         connectionLimit: 2
     },
     //高德的key
-    amapkey: ""
+    amapkey: "",
+    //百度地图ak
+    bdak:""
 };

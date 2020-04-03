@@ -44,6 +44,16 @@ const Ips = db.define(
             type: Sequelize.STRING(50),
             defaultValue: "",
             comment: "经度"
+        },
+        province: {
+            type: Sequelize.STRING(100),
+            defaultValue: "",
+            comment: "省"
+        },
+        city: {
+            type: Sequelize.STRING(100),
+            defaultValue: "",
+            comment: "省"
         }
     },
     {
