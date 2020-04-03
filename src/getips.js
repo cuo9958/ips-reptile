@@ -55,6 +55,7 @@ function save() {
 
 function getIps() {
     const bl = getNow();
+    console.log("=======", curip.i1, curip.i2, curip.i3, curip.i4, "=======");
     if (bl === null) {
         curip = {
             i1: 0,

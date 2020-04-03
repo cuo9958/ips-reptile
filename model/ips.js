@@ -106,7 +106,7 @@ function getip12(ip) {
     };
 }
 function getIndex(ip1, ip2) {
-    const res = ip1 * (ip2 % 4);
+    const res = ip1 * ((ip2 % 4) + 1);
     if (isNaN(res)) return 0;
     return res;
 }
