@@ -33,10 +33,16 @@ function getNow() {
     } catch (error) {
         console.log(error);
     }
-    if (curip.i1 != 255) return curip.i1++;
-    if (curip.i2 != 255) return curip.i2++;
-    if (curip.i3 != 255) return curip.i3++;
-    if (curip.i4 != 255) return curip.i4++;
+    curip.i1++;
+    if (curip.i1 >= 255) {
+        curip.i2++;
+    }
+    if (curip.i2 >= 255) {
+        curip.i3++;
+    }
+    if (curip.i3 >= 255) {
+        curip.i4++;
+    }
     return null;
 }
 
