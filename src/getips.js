@@ -69,5 +69,16 @@ function getIps() {
 module.exports = {
     getIps,
     save,
-    getNow
+    getNowIp() {
+        const bl = getNow();
+        if (bl === null) {
+            curip = {
+                i1: 0,
+                i2: 0,
+                i3: 0,
+                i4: 0
+            };
+        }
+        return `${curip.i1}.${curip.i2}.${curip.i3}.${curip.i4}`;
+    }
 };
