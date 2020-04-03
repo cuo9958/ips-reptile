@@ -66,6 +66,9 @@ function getIps() {
     save();
     return `${curip.i1}.${curip.i2}.${curip.i3}.${curip.i4}`;
 }
+
+const rdips = new Set();
+
 module.exports = {
     getIps,
     save,
@@ -85,6 +88,11 @@ module.exports = {
         function getOne() {
             return Math.round(Math.random() * 255);
         }
-        return `${getOne()}.${getOne()}.${getOne()}.${getOne()}`;
+        let ip = `${getOne()}.${getOne()}.${getOne()}.${getOne()}`;
+        if (rdips.has(ip)) {
+            ip = `${getOne()}.${getOne()}.${getOne()}.${getOne()}`;
+        }
+        rdips.add(ip);
+        return ip;
     }
 };
