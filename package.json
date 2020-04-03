@@ -20,6 +20,7 @@
     "sequelize": "^5.21.5"
   },
   "devDependencies": {
+    "@types/sequelize": "^4.28.8",
     "puppeteer": "^2.1.1"
   }
 }

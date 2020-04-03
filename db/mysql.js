@@ -19,4 +19,5 @@ const mysqlconnection = new Sequelize(dbConfig.database, dbConfig.user, dbConfig
         idle: 10000
     }
 });
+
 module.exports = mysqlconnection;
