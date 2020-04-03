@@ -21,6 +21,7 @@ const saveData = async data => {
     }
     console.log("保存数据到数据库", objs);
     if (!objs.ip) return console.log("ip错误");
+    if (!objs.address.trim()) return console.log("空地址错误");
     const model = await ipsModel.get(objs.ip);
     if (!model) {
         ipsModel.create(objs);
