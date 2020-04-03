@@ -12,7 +12,7 @@ const def = {
     longitude: ""
 };
 //ip,address,ip6,ip6v,d1
-const saveData = data => {
+const saveData = async data => {
     let objs = Object.assign({}, def, data);
     for (const key in objs) {
         if (objs[key] === undefined || objs[key] === null) {
@@ -21,7 +21,12 @@ const saveData = data => {
     }
     console.log("保存数据到数据库", objs);
     if (!objs.ip) return console.log("ip错误");
-    ipsModel.upsert(objs);
+    const model = await ipsModel.get(objs.ip);
+    if (!model) {
+        ipsModel.create(objs);
+    } else {
+        ipsModel.update(objs, objs.ip);
+    }
 };
 
 module.exports = saveData;

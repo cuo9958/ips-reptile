@@ -61,16 +61,19 @@ const Ips = db.define(
 // Ips.sync({ force: true });
 
 module.exports = {
-    upsert: function(model) {
-        return Ips.upsert(model, {
-            ip: model.ip
-        });
+    create: function(model) {
+        return Ips.create(model);
     },
-    get: function(id) {
+    get: function(ip) {
         return Ips.findOne({
             where: {
-                id
+                ip
             }
+        });
+    },
+    update: function(model, ip) {
+        return Ips.update(model, {
+            where: { ip }
         });
     },
     getCount(limit = 1, name = "") {
