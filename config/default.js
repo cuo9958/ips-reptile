@@ -8,5 +8,7 @@ module.exports = {
         user: "test_a",
         password: "test_a",
         connectionLimit: 2
-    }
+    },
+    //高德的key
+    amapkey: ""
 };

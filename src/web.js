@@ -1,5 +1,9 @@
+const axios = require("axios");
+const config = require("config");
 const saveData = require("./save");
 const getIps = require("./getips");
+
+const amapkey = config.get("amapkey");
 
 /**
  * 网址https://www.ip138.com/iplookup.asp
@@ -23,7 +27,7 @@ async function ip138(page, browser) {
     //参考数据2：
     //兼容IPv6地址：
     //映射IPv6地址：
-    console.log(page.url())
+    console.log(page.url());
     const address = list[1].replace("参考数据1：", "");
     const d1 = list[2].replace("参考数据2：", "");
     const ip6 = list[4].replace("映射IPv6地址：", "");
@@ -54,7 +58,7 @@ async function ipcn(page, browser) {
     });
 
     if (list.length < 2) return;
-    console.log(page.url())
+    console.log(page.url());
     const address = list[1].replace(" ", "");
     saveData({
         ip,
@@ -79,7 +83,7 @@ async function chinaz(page, browser) {
     });
 
     if (list.length < 2) return;
-    console.log(page.url())
+    console.log(page.url());
     const address = list[1].replace(" ", "");
     saveData({
         ip,
@@ -145,7 +149,7 @@ async function t086(page, browser) {
     });
 
     if (list.length < 2) return;
-    console.log(page.url())
+    console.log(page.url());
     const address = list[0];
     const latitude = list[1];
     const longitude = list[2];
@@ -173,7 +177,7 @@ async function hao7188(page, browser) {
     });
 
     if (list.length < 2) return;
-    console.log(page.url())
+    console.log(page.url());
     const address = list[0];
     const d1 = list[2];
     saveData({
@@ -197,7 +201,7 @@ async function yqie(page, browser) {
     });
 
     if (list.length === 0) return;
-    console.log(page.url())
+    console.log(page.url());
     const address = list[0];
     saveData({
         ip,
@@ -224,7 +228,7 @@ async function ip51240(page, browser) {
     });
 
     if (list.length === 0) return;
-    console.log(page.url())
+    console.log(page.url());
     const address = list[0];
     saveData({
         ip,
@@ -253,13 +257,44 @@ async function ip5(page, browser) {
     });
 
     if (list.length === 0) return;
-    console.log(page.url())
+    console.log(page.url());
     const address = list[0];
     saveData({
         ip,
         address
     });
 }
+
+let amapCount = 0;
+/**
+ * 使用高德api
+ */
+async function amap() {
+    if (amapCount > 300000) return;
+    amapCount++;
+    const ip = getIps();
+    try {
+        const res = await axios.get("https://restapi.amap.com/v3/ip?ip=" + ip + "&key=" + amapkey);
+        const data = res.data;
+        if (data.status == 1 && data.infocode == "10000") {
+            let province = data.province;
+            if (typeof province == "object") {
+                province = province.join(",");
+            }
+            let city = data.city;
+            if (typeof city == "object") {
+                city = city.join(",");
+            }
+            saveData({
+                ip,
+                address: province + " " + city
+            });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 module.exports = [
     ip138,
     ipcn,
@@ -269,5 +304,6 @@ module.exports = [
     hao7188,
     yqie,
     ip51240,
-    ip5
+    ip5,
+    amap
 ];
