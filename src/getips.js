@@ -53,7 +53,7 @@ function save() {
     fs.writeFileSync(filePath, JSON.stringify(curip));
 }
 
-module.exports = function() {
+function getIps() {
     const bl = getNow();
     if (bl === null) {
         curip = {
@@ -65,4 +65,9 @@ module.exports = function() {
     }
     save();
     return `${curip.i1}.${curip.i2}.${curip.i3}.${curip.i4}`;
+}
+module.exports = {
+    getIps,
+    save,
+    getNow
 };

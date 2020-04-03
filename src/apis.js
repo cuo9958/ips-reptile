@@ -1,7 +1,7 @@
 const axios = require("axios");
 const config = require("config");
 const saveData = require("./save");
-const getIps = require("./getips");
+const ipServer = require("./getips");
 
 const amapkey = config.get("amapkey");
 const bdak = config.get("bdak");
@@ -13,7 +13,7 @@ let amapCount = 0;
 async function amap() {
     if (amapCount > 300000) return;
     amapCount++;
-    const ip = getIps();
+    const ip = ipServer.getNow();
     try {
         const res = await axios.get("https://restapi.amap.com/v3/ip?ip=" + ip + "&key=" + amapkey);
         const data = res.data;
@@ -27,6 +27,7 @@ async function amap() {
                 city = city.join(",");
             }
             console.log("restapi.amap.com/v3/ip");
+            ipServer.save();
             saveData({
                 ip,
                 address: province + " " + city,
@@ -45,7 +46,7 @@ let bdCount = 0;
 async function baidumap() {
     if (bdCount > 30000) return;
     bdCount++;
-    const ip = getIps();
+    const ip = ipServer.getNow();
     try {
         const res = await axios.get("http://api.map.baidu.com/location/ip?ak=" + bdak + "&ip=" + ip);
         const data = res.data;
@@ -54,6 +55,7 @@ async function baidumap() {
             let city = data.content.address_detail.city;
             let address = data.address;
             console.log("api.map.baidu.com/location/ip");
+            ipServer.save();
             saveData({
                 ip,
                 address,

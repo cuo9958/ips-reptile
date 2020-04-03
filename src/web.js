@@ -1,6 +1,7 @@
 const saveData = require("./save");
-const getIps = require("./getips");
+const ipServer = require("./getips");
 
+const getIps=ipServer.getIps
 /**
  * 网址https://www.ip138.com/iplookup.asp
  * @param {*} page page
