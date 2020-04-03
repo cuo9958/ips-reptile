@@ -43,7 +43,7 @@ function getNow() {
     if (curip.i3 >= 255) {
         curip.i4++;
     }
-    return null;
+    if (curip.i1 === 255 && curip.i2 === 255 && curip.i3 === 255 && curip.i4 === 255) return null;
 }
 
 function save() {
