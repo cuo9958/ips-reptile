@@ -35,12 +35,15 @@ function getNow() {
     }
     curip.i1++;
     if (curip.i1 >= 255) {
+        curip.i1 = 0;
         curip.i2++;
     }
     if (curip.i2 >= 255) {
+        curip.i2 = 0;
         curip.i3++;
     }
     if (curip.i3 >= 255) {
+        curip.i3 = 0;
         curip.i4++;
     }
     if (curip.i1 === 255 && curip.i2 === 255 && curip.i3 === 255 && curip.i4 === 255) return null;
