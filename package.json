@@ -1,0 +1,24 @@
+{
+  "name": "ips-reptile",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "export NODE_ENV=production && node index.js",
+    "dev": "export NODE_ENV=production && node dev.js",
+    "dw": "export PUPPETEER_DOWNLOAD_HOST=http://127.0.0.1:5000 &&npm i puppeteer -D"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "archiver": "^3.1.1",
+    "config": "^3.3.1",
+    "cron": "^1.8.2",
+    "mysql2": "^2.1.0",
+    "sequelize": "^5.21.5"
+  },
+  "devDependencies": {
+    "puppeteer": "^2.1.1"
+  }
+}
