@@ -3,7 +3,7 @@ const CronJob = require("cron").CronJob;
 
 async function main() {
     let apiIndex = 0;
-    new CronJob("*/5 * * * * *", async function() {
+    new CronJob("*/1 * * * * *", async function() {
         try {
             await apis[apiIndex]();
         } catch (error) {
