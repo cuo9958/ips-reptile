@@ -12,7 +12,7 @@ let curip = {
     i1: 0,
     i2: 0,
     i3: 0,
-    i4: 0
+    i4: 0,
 };
 
 fs.exists(filePath, e => {
@@ -46,6 +46,10 @@ function getNow() {
         curip.i3 = 0;
         curip.i4++;
     }
+    //去掉局域网的查询
+    if (curip.i1 === 10) curip.i1++;
+    if (curip.i1 === 192 && curip.i2 === 168) curip.i2++;
+    
     if (curip.i1 === 255 && curip.i2 === 255 && curip.i3 === 255 && curip.i4 === 255) return null;
 }
 
@@ -61,7 +65,7 @@ function getIps() {
             i1: 0,
             i2: 0,
             i3: 0,
-            i4: 0
+            i4: 0,
         };
     }
     save();
@@ -80,7 +84,7 @@ module.exports = {
                 i1: 0,
                 i2: 0,
                 i3: 0,
-                i4: 0
+                i4: 0,
             };
         }
         return `${curip.i1}.${curip.i2}.${curip.i3}.${curip.i4}`;
@@ -95,5 +99,5 @@ module.exports = {
         }
         rdips.add(ip);
         return ip;
-    }
+    },
 };
