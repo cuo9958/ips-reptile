@@ -1,4 +1,4 @@
-const apis = require("./src/apis");
+const apis = require("./src/api2");
 const CronJob = require("cron").CronJob;
 
 async function main() {
