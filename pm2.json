@@ -1,0 +1,11 @@
+{
+    "apps": [
+        {
+            "name": "ip_reptile",
+            "script": "index.js",
+            "env": {
+                "NODE_ENV": "production"
+            }
+        }
+    ]
+}
