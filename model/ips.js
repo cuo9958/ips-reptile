@@ -80,7 +80,7 @@ for (let index = 0; index < 1021; index++) {
                 comment: "省",
             },
             abroad: {
-                type: Sequelize.INTEGER,
+                type: Sequelize.INTEGER(2),
                 defaultValue: 0,
                 comment: "1。国外",
             },
