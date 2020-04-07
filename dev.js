@@ -30,17 +30,17 @@ async function main() {
         }).start();
     }
 
-    let apiIndex = 0;
-    new CronJob("*/1 * * * * *", async function() {
-        try {
-            await apis[apiIndex]();
-        } catch (error) {
-            console.log(error);
-        } finally {
-            apiIndex++;
-            if (apiIndex >= apis.length) apiIndex = 0;
-        }
-    }).start();
+    // let apiIndex = 0;
+    // new CronJob("*/1 * * * * *", async function() {
+    //     try {
+    //         await apis[apiIndex]();
+    //     } catch (error) {
+    //         console.log(error);
+    //     } finally {
+    //         apiIndex++;
+    //         if (apiIndex >= apis.length) apiIndex = 0;
+    //     }
+    // }).start();
 }
 
 main();
