@@ -27,12 +27,15 @@ async function amap() {
                 city = city.join(",");
             }
             console.log("restapi.amap.com/v3/ip");
-            saveData({
-                ip,
-                address: province + " " + city,
-                province,
-                city
-            });
+            saveData(
+                {
+                    ip,
+                    address: province + " " + city,
+                    province,
+                    city,
+                },
+                !province
+            );
         }
     } catch (error) {
         console.log(error);
@@ -54,12 +57,15 @@ async function baidumap() {
             let city = data.content.address_detail.city;
             let address = data.address;
             console.log("api.map.baidu.com/location/ip");
-            saveData({
-                ip,
-                address,
-                province,
-                city
-            });
+            saveData(
+                {
+                    ip,
+                    address,
+                    province,
+                    city,
+                },
+                !address
+            );
         }
     } catch (error) {
         console.log(error);
