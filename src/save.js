@@ -23,13 +23,13 @@ const saveData = async (data, other) => {
             objs[key] = "";
         }
     }
-    console.log("保存数据到数据库", objs);
     if (!objs.ip) return console.log("ip错误");
     if (other) {
         objs.abroad = 1;
     } else {
         if (!objs.address.trim()) return console.log("空地址错误");
     }
+    console.log("保存数据到数据库", objs);
     const model = await ipsModel.get(objs.ip);
     if (!model) {
         ipsModel.create(objs);
