@@ -12,82 +12,87 @@ for (let index = 0; index < 1021; index++) {
             id: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
-                autoIncrement: true
+                autoIncrement: true,
             },
             ip: {
                 type: Sequelize.STRING(20),
                 defaultValue: "",
-                comment: "ip"
+                comment: "ip",
             },
             ip1: {
                 type: Sequelize.STRING(20),
                 defaultValue: "",
-                comment: "ip1"
+                comment: "ip1",
             },
             ip2: {
                 type: Sequelize.STRING(20),
                 defaultValue: "",
-                comment: "ip2"
+                comment: "ip2",
             },
             ip3: {
                 type: Sequelize.STRING(20),
                 defaultValue: "",
-                comment: "ip3"
+                comment: "ip3",
             },
             ip4: {
                 type: Sequelize.STRING(20),
                 defaultValue: "",
-                comment: "ip4"
+                comment: "ip4",
             },
             address: {
                 type: Sequelize.STRING,
                 defaultValue: "",
-                comment: "地址"
+                comment: "地址",
             },
             ip6: {
                 type: Sequelize.STRING(50),
                 defaultValue: "",
-                comment: "ip6"
+                comment: "ip6",
             },
             ip6v: {
                 type: Sequelize.STRING(50),
                 defaultValue: "",
-                comment: "ip6兼容"
+                comment: "ip6兼容",
             },
             d1: {
                 type: Sequelize.STRING,
                 defaultValue: "",
-                comment: "备用数据1"
+                comment: "备用数据1",
             },
             latitude: {
                 type: Sequelize.STRING(50),
                 defaultValue: "",
-                comment: "纬度"
+                comment: "纬度",
             },
             longitude: {
                 type: Sequelize.STRING(50),
                 defaultValue: "",
-                comment: "经度"
+                comment: "经度",
             },
             province: {
                 type: Sequelize.STRING(100),
                 defaultValue: "",
-                comment: "省"
+                comment: "省",
             },
             city: {
                 type: Sequelize.STRING(100),
                 defaultValue: "",
-                comment: "省"
-            }
+                comment: "省",
+            },
+            abroad: {
+                type: Sequelize.INTEGER,
+                defaultValue: 0,
+                comment: "1。国外",
+            },
         },
         {
             freezeTableName: true,
             indexes: [
                 {
                     unique: true,
-                    fields: ["ip"]
-                }
-            ]
+                    fields: ["ip"],
+                },
+            ],
         }
     );
     models.push(Ips);
@@ -102,7 +107,7 @@ function getip12(ip) {
         ip1: list[0],
         ip2: list[1],
         ip3: list[2],
-        ip4: list[3]
+        ip4: list[3],
     };
 }
 function getIndex(ip1, ip2) {
@@ -111,7 +116,7 @@ function getIndex(ip1, ip2) {
     return res;
 }
 module.exports = {
-    create: function(model) {
+    create: function (model) {
         if (!model.ip) return;
         const data = getip12(model.ip);
         let index = getIndex(data.ip1, data.ip2);
@@ -123,7 +128,7 @@ module.exports = {
         model.ip4 = data.ip4;
         return ipmodel.create(model);
     },
-    get: function(ip) {
+    get: function (ip) {
         if (!ip) return;
         const data = getip12(ip);
         let index = getIndex(data.ip1, data.ip2);
@@ -131,18 +136,18 @@ module.exports = {
         if (!ipmodel) return;
         return ipmodel.findOne({
             where: {
-                ip
-            }
+                ip,
+            },
         });
     },
-    update: function(model, ip) {
+    update: function (model, ip) {
         if (!ip) return;
         const data = getip12(ip);
         let index = getIndex(data.ip1, data.ip2);
         const ipmodel = models[index];
         if (!ipmodel) return;
         return ipmodel.update(model, {
-            where: { ip }
+            where: { ip },
         });
-    }
+    },
 };
