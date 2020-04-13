@@ -14,6 +14,8 @@ const def = {
     city: "",
     //是否国外，1国外
     abroad: 0,
+    //运营商
+    isp: "",
 };
 //ip,address,ip6,ip6v,d1
 const saveData = async (data, other) => {

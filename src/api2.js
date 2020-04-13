@@ -2,6 +2,11 @@ const axios = require("axios");
 const config = require("config");
 const saveData = require("./save");
 const ipServer = require("./getips");
+const fs = require("fs");
+const path = require("path");
+const utils = require("util");
+
+const rootPath = path.resolve(__dirname, "../");
 
 const amapkey = config.get("amapkey");
 const bdak = config.get("bdak");
@@ -71,4 +76,48 @@ async function baidumap() {
         console.log(error);
     }
 }
+/**
+ * 淘宝的不稳定
+ */
+async function taobao() {
+    const ip = ipServer.getIps();
+    try {
+        const res = await axios.get("http://ip.taobao.com/service/getIpInfo.php?ip=" + ip, {
+            headers: {
+                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.7 Safari/537.36",
+            },
+        });
+        const jsondata = res.data;
+        if (jsondata.code === 0) {
+            console.log("ip.taobao.com");
+            const data = jsondata.data;
+            const isp = data.isp || "";
+            let province = data.region;
+            if (province.toLowerCase() == "xx") throw new Error("查询失败");
+            if (!["北京", "天津", "重庆"].includes(province)) {
+                province = province + "省";
+            }
+            const city = data.city;
+            console.log(
+                {
+                    province,
+                    city,
+                    isp,
+                },
+                data.country !== "中国"
+            );
+            // saveData(
+            //     {
+            //         province,
+            //         city,
+            //         isp,
+            //     },
+            //     data.country !== "中国"
+            // );
+        }
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
 module.exports = [amap, baidumap];

@@ -77,12 +77,17 @@ for (let index = 0; index < 1021; index++) {
             city: {
                 type: Sequelize.STRING(100),
                 defaultValue: "",
-                comment: "省",
+                comment: "市",
             },
             abroad: {
                 type: Sequelize.INTEGER(2),
                 defaultValue: 0,
                 comment: "1。国外",
+            },
+            isp: {
+                type: Sequelize.STRING(100),
+                defaultValue: "",
+                comment: "运营商",
             },
         },
         {

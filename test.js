@@ -1,14 +1,7 @@
 let str = [];
 //1021
-for (let index = 0; index < 1021; index++) {
+for (let index = 1000; index < 1021; index++) {
     const name = "t_ips_" + ((index % 255) + "").padStart(3, "0") + (index % 4);
-    str.push(name);
+    str.push(`ALTER TABLE ${name} ADD COLUMN isp varchar(100) DEFAULT '' COMMENT '运营商';`);
 }
-console.log(str[1020])
-function getIndex(ip1, ip2) {
-    const res = ip1 * ((ip2 % 4) + 1);
-    if (isNaN(res)) return 0;
-    console.log(res)
-    return res;
-}
-getIndex("255","255")
+console.log(str.join(""));
