@@ -16,8 +16,8 @@ let amapCount = 0;
  * 使用高德api
  */
 async function amap() {
-    if (amapCount > 300000) return;
-    amapCount++;
+    // if (amapCount > 300000) return;
+    // amapCount++;
     const ip = ipServer.getIps();
     try {
         const res = await axios.get("https://restapi.amap.com/v3/ip?ip=" + ip + "&key=" + amapkey);
@@ -51,8 +51,8 @@ let bdCount = 0;
  * 百度api调用
  */
 async function baidumap() {
-    if (bdCount > 30000) return;
-    bdCount++;
+    // if (bdCount > 30000) return;
+    // bdCount++;
     const ip = ipServer.getIps();
     try {
         const res = await axios.get("http://api.map.baidu.com/location/ip?ak=" + bdak + "&ip=" + ip);
