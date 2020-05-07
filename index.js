@@ -12,10 +12,9 @@ const ip2 = Ip2region.create(dbPath);
 app.use(KoaBody());
 
 router.get("/", async function (ctx, next) {
-    const ip = ctx.ip;
-    const group = ip.match(/[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/);
-    if (group.length > 0) {
-        ctx.body = group[0];
+    const ip = ctx.headers["x-real-ip"] || "";
+    if (ip) {
+        ctx.body = `您的ip地址:${ip}`;
     } else {
         ctx.body = "输入ip地址查询结果";
     }
