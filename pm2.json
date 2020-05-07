@@ -1,10 +1,11 @@
 {
     "apps": [
         {
-            "name": "ip_reptile",
+            "name": "ip_reptile@18700",
             "script": "index.js",
             "env": {
-                "NODE_ENV": "production"
+                "NODE_ENV": "production",
+                "PORT": 18700
             }
         }
     ]
