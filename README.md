@@ -9,7 +9,7 @@
 
 ## 返回信息
 
-```json
+```javascript
 {
     "code": 1, //状态值：0失败，1成功
     "data": {
