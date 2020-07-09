@@ -6,7 +6,8 @@
             "env": {
                 "NODE_ENV": "production",
                 "PORT": 18700
-            }
+            },
+            "instances": 1
         }
     ]
 }
